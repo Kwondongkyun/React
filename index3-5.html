@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+        const [amount, setAmount] = React.useState(0);
+        const [inverted, setInverted] = React.useState(false);
+        const onChange = (event) => {
+            setAmount(event.target.value);
+        };
+        const reset = () => setAmount(0);
+        // Invert시 모든 값 reset, current의 상태 변경 -> Invert 시켜준다.
+        const onInvert = () => {
+            reset();
+            setInverted(current => !current)
+        };
+        ///////////////////////////////////////////////////////////////////////////
+        return (
+            // default값 : false 
+            // minutes의 disabled : true, hours의 disabled : false이므로
+            // hours가 먼저 disabled 된다.
+            <div>
+                <h1>Super Converter</h1>
+                <div>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input
+                        value={inverted ? amount * 60 : amount}
+                        id="minutes"
+                        placeholder="Minutes"
+                        type="number"
+                        onChange={onChange}
+                        disabled={inverted === true}
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input
+                        // inverted가 true이면 minutes->hours가 disabled되고
+                        // hours->minutes가 enabled되므로
+                        // 삼항연산자가 true가 되어
+                        // value = amout(입력값)가 되어
+                        // amount(입력값)가 보인다.
+                        value={inverted ? amount : Math.round(amount / 60)}
+                        id="hours"
+                        placeholder="Hours"
+                        type="number"
+                        onChange={onChange}
+                        disabled={inverted === false}
+                    />
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onInvert}>{inverted ? "Turn back" : "Invert"}</button>
+            </div>
+        );
+    }
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>

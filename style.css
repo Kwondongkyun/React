@@ -1,0 +1,18 @@
+body{
+    background: skyblue;
+    border: 2px solid black;
+    border-bottom: ;
+}
+
+select{
+    background-color:bisque;
+}
+
+div label{
+    color: red;
+}
+
+div button{
+    background-color: darkgoldenrod;
+    color: white;
+}
