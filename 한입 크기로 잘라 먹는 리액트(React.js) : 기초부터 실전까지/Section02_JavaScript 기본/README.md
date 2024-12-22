@@ -12,35 +12,30 @@ const birth = "2001.01.01";
 ```
 
 ### 3. 변수 명명규칙(네이밍 규칙)
-- <h4>$, _ 제외한 기호는 사용할 수 없다.</h4>
-
+- $, _ 제외한 기호는 사용할 수 없다.
   ```
   let $_name;
   ```
 
-- <h4>숫자로 시작할 수 없다.</h4>
-
+- 숫자로 시작할 수 없다.
   ```
   let name1;
   let _2name;
   ```
 
-- <h4>예약어를 사용할 수 없다.</h4>
-
+- 예약어를 사용할 수 없다.
   ```
   let if;  // 오류
   let name;
   ```
 
 ### 4. 변수 명명 가이드
-
-- <p>어떤 역할을 하는 변수인지 알아볼 수 있게 작성하는게 좋다.</p>
+- 어떤 역할을 하는 변수인지 알아볼 수 있게 작성하는게 좋다.
 
 ---
 # 자료형
 ### 1. Number Type
-- <h4>양수, 음수, 실수, 무한대, ...</h4>
-
+- 양수, 음수, 실수, 무한대, ...
   ```
   let num1 = 27;
   let num2 = 1.5;
@@ -53,46 +48,242 @@ const birth = "2001.01.01";
   ```
 
 ### 2. String Type(문자열)
-- <h4>문자열 값들을 모두 포함하는 타입 (ex. 사람 이름)</h4>
-
+- 문자열 값들을 모두 포함하는 타입 (ex. 사람 이름)
   ```
   let myName = "권";
   ```
 
-- <h4>덧셈 연산 지원</h4>
-
+- 덧셈 연산 지원
   ```
   let myLocation = "분당";
   let introduce = myName + myLocation;
   ```
 
-- <h4>백틱 (``) / 템플릿 리터럴 문법<br> -> 문자열 안에 변수의 값을 동적으로 집어 넣을 수 있다.</h4>
-
+- 백틱 (``) / 템플릿 리터럴 문법<br> -> 문자열 안에 변수의 값을 동적으로 집어 넣을 수 있다.
   ```
   let introduceText = `${myName}은 ${myLocation}에 거주합니다.`;
   ```
 
 ### 3. Boolean Type
-
-- <h4>현재의 상태를 의미하는 데에 주로 사용된다.</h4>
-
+- 현재의 상태를 의미하는 데에 주로 사용된다.
   ```
   let isSwitchOn = true;
   let isEmpty = false;
   ```
 
 ### 4. Null Type (아무것도 없다)
-- <h4>어떠한 변수에 아무런 값도 담겨 있지 않음을 표현하기 위해 사용</h4>
-
+- 어떠한 변수에 아무런 값도 담겨 있지 않음을 표현하기 위해 사용
   ```
   let empty = null;
   ```
-### 5. Undefined Type
-- <h4>변수를 선언하고 아무런 값도 할당하지 않았을 때 자동으로 들어가는 값</h4>
 
+### 5. Undefined Type
+- 변수를 선언하고 아무런 값도 할당하지 않았을 때 자동으로 들어가는 값
   ```
   let none;
   ```
 ---
 
+# 형변환
 
+### 묵시적 형 변환
+- 자바스크립트 엔진이 알아서 형 변환 하는 것
+  ```
+  let num = 10;
+  let str = "20";
+  
+  const result = num + str; // 1020
+  ```
+
+### 명시적 형 변환
+프로그래머가 내장함수 등을 이용해서 직접 형 변환을 명시
+  
+- Number(문자열 -> 숫자)
+  ```
+  let str1 = "10";
+  let strToNum1 = Number(str1); // 10
+  ```
+
+- parseInt 내장함수 <br><br> -> 숫자 값이 아닌 값을 포함하고 있는 문자열도 숫자 값으로 변환
+  ```
+  let str2 = "10개";
+  let strToNum2 = parseInt(str2); // 10
+  ```
+
+- String(숫자 -> 문자열)
+  ```
+  let num1 = 20;
+  let numToStr1 = String(num1);
+  
+  console.log(numToStr1 + "입니다."); // 20입니다.
+  ```
+---
+# 연산자
+### 대입 연산자
+```
+let var1 = 1;
+```
+
+### 산술 연산자
+- 사칙연산(+, -, *, /), 나머지(%)
+  ```
+  let num1 = 3 + 2;
+  let num2 = 3 - 2;
+  let num3 = 3 * 2;
+  let num4 = 3 / 2;
+  let num5 = 3 % 2;
+  ```
+
+### 복합 대입 연산자
+- 복합이란? 산술, 대입 연산자의 복합
+  ```
+  let num7 = 10;
+  num7 += 20;
+  ```
+
+### 증감 연산자
+- 전위 연산자, 후위 연산자
+  ```
+  let num8 = 10;
+  ++num8; // 전위 연산
+  num8++; // 후위 연산
+  ```
+
+### 논리 연산자
+
+- True, False만 저장하는 Boolean 타입의 값을 다룰 때 사용하는 연산자
+  ```
+  let or = true || false; // true
+  
+  let and = true && false; // false
+  
+  let not = !true; // false
+  ```
+
+### 비교 연산자
+<ul>
+  <li>== : 값 자체로만 비교, 자료형 비교 X</li>
+  <li>=== : 값, 자료형 둘 다 비교 O</li>
+</ul>
+
+  ```
+  let comp1 = 1 === 2; // false
+  let comp2 = 1 !== 2; // true
+  
+  let comp3 = 2 > 1; // true
+  let comp4 = 2 < 1; // false
+  
+  let comp5 = 2 >= 2; // true
+  let comp6 = 2 <= 2; // true
+  ```
+
+---
+# 자바스크립트 특수 연산자
+### null 병합 연산자(??)
+<ul>
+  <li>존재하는 값을 추려내는 기능</li>
+  <li>null, undefined가 아닌 값을 찾아내는 연산자</li>
+</ul>
+
+
+- 피연산자(연산에 참여하는 값들)중에 null이나 undefined이 아닌 값을 찾아낸다.
+  ```
+  let var1;
+  let var2 = 10;
+  let var3 = 20;
+  let var4 = var1 ?? var2; // 10;
+  let var5 = var1 ?? var3; // 20;
+  ```
+
+- 두 피연산자 모두 null이나 undefined이 아닌 경우 맨 처음 값 반환(var3)
+  ```
+  let var6 = var3 ?? var2; // 20
+  ```
+
+### typeof 연산자
+- 값의 타입을 문자열로 반환하는 기능을 하는 연산자
+  ```
+  let var7 = 1;
+  var7 = "hello";
+  var7 = true;
+  
+  let t1 = typeof var7;
+  console.log(t1);
+  ```
+
+### 삼항 연산자
+- 항을 3개 사용하는 연산자
+- 조건식을 이용해서 참, 거짓일 때의 값을 다르게 반환
+  ```
+  (조건식) ? (참일 때의 반환값) : (거짓일 때의 반환값);
+  ```
+  ```
+  let var8 = 10;
+  let res = var8 % 2 === 0 ? "짝수" : "홀수";
+  
+  console.log(res); // 짝수
+  ```
+---
+# 조건문(Conditional Statement)
+- 특정 조건을 만족했을 때에만 실행되는 코드를 작성하기 위한 문법
+- 대표적으로 if, switch 조건문이 존재함
+
+### if 조건문
+```
+let num = 5;
+
+if (num >= 10) {
+  console.log("num은 10 이상입니다");
+}
+else if (num >= 5) {
+  console.log("num은 5 이상입니다");
+}
+else if (num >= 3) {
+  console.log("num은 3 이상입니다");
+}
+else {
+  console.log("조건이 거짓입니다!");
+}
+```
+
+### Switch 문
+- if문과 기능 자체는 동일
+- 다수의 조건을 처리할 때 if보다 더 직관적이다.
+  ```
+  switch-case 문
+  
+  : 기본적으로 소괄호 안에 있는 변수의 값과 일치하는 케이스를 위에서부터 아래로 차례로 탐색함
+  일치하는 case를 만나게 되면 그 아래에 있는 모든 코드를 다 수행 시켜준다.
+  
+  -> break 문으로 해결 가능
+  ```
+
+  ```
+  let animal = "owl";
+
+  switch (animal) {
+    case "cat": {
+      console.log("고양이");
+      break;
+    }
+    case "dog": {
+      console.log("강아지");
+      break;
+    }
+    case "bear": {
+      console.log("곰");
+      break;
+    }
+    case "snake": {
+      console.log("뱀");
+      break;
+    }
+    case "tiger": {
+      console.log("호랑이");
+      break;
+    }
+    default: {
+      console.log("그런 동물은 전 모릅니다");
+    }
+  }
+  ```
