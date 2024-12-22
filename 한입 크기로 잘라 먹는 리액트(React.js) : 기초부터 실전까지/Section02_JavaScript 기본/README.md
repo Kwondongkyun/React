@@ -327,14 +327,6 @@ JavaScript에서 기본 구성 요소 중 하나이다. 보통 함수란 자신�
     }
     ```
 
-- 함수 표현식(function expression) : 익명 함수라 하며. 함수가 이름을 가질 필요는 없음을 의미
-  ```
-  const square = function (number) {
-    return number * number;
-  };
-  const x = square(4); // `x` 의 값은 16
-  ```
-
   
 - 함수 호출 : 함수를 호출하면 지정된 매개 변수를 가지고 작업이 수행
   ```
@@ -388,3 +380,28 @@ function getArea(width, height) {
   return area;
 }
 ```
+---
+## 함수 표현식(function expression)
+- <b>함수 표현식(function expression)</b> : 익명 함수라 하며. 함수가 이름을 가질 필요는 없음을 의미
+  - 값으로써 함수를 생성하는 방식
+  - 호이스팅 불가능하다.
+  
+  ```
+  const square = function (number) {
+    return number * number;
+  };
+  const x = square(4); // `x` 의 값은 16
+  ```
+
+- <b>화살표 함수</b> : 함수를 이전보다 더 빠르고 간결하게 생성해 줄 수 있도록 도와줌
+  ```
+  let varC = (value) => {
+    console.log(value); // 10
+    return value + 1;
+  };
+  console.log(varC(10)); // 11
+
+  
+  let varD = (value) => value * 10;
+  console.log(varD(20)); // 200
+  ```
