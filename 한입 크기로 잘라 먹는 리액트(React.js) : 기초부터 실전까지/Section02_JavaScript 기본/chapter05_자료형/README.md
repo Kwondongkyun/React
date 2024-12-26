@@ -45,7 +45,7 @@
 
 ### 5. Undefined Type
 - 변수를 선언하고 아무런 값도 할당하지 않았을 때 자동으로 들어가는 값
-  ```
+  ```javascript
   let none;
   ```
 ---
