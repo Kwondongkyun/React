@@ -1,5 +1,5 @@
 # Section02_JavaScript 기본
-<h4>변수</h4>
+<h4><a href="www.naver.com">변수</a></h4>
 <h4>자료형</h4>
 <h4>형변환</h4>
 <h4>연산자1</h4>
