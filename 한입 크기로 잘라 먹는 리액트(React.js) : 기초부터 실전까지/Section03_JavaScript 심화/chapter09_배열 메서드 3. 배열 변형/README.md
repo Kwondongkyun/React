@@ -82,7 +82,8 @@ console.log(names); // ["kwon", "park", "choi"]
 #### 특징
 - **원본 배열은 그대로 유지**된다.
 - 최신 ES 사양에서 추가된 메서드로, 기존 `sort` 메서드의 부작용을 방지한다.
-- (https://www.notion.so/sort-1701c69c9ddf806f969ae19624af4117)
+> `sort` 메서드 부작용<br />
+> (https://www.notion.so/sort-1701c69c9ddf806f969ae19624af4117)
 
 #### 코드 예제
 ```javascript
