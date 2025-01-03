@@ -37,7 +37,6 @@ console.log(tennisPeople);
 #### 코드 예제
 ```javascript
 let arr2 = [1, 2, 3];
-
 const mapResult = arr2.map((item) => item * 2);
 console.log(mapResult); // [2, 4, 6]
 
@@ -61,14 +60,15 @@ console.log(names); // ["kwon", "park", "choi"]
   ```javascript
   let arr4 = ["c", "a", "b"];
   arr4.sort();
+  
   console.log(arr4); // ["a", "b", "c"]
   ```
 
 - 숫자 정렬 (오름차순)
   ```javascript
   let arr3 = [10, 3, 5];
-  
   arr3.sort((a, b) => a - b);
+  
   console.log(arr3); // [3, 5, 10]
   ```
 
@@ -86,13 +86,22 @@ console.log(names); // ["kwon", "park", "choi"]
 > (https://www.notion.so/sort-1701c69c9ddf806f969ae19624af4117)
 
 #### 코드 예제
-```javascript
-let arr5 = ["c", "a", "b"];
-const sorted = arr5.toSorted();
-
-console.log(arr5); // ["c", "a", "b"]
-console.log(sorted); // ["a", "b", "c"]
-```
+- 문자열 정렬
+  ```javascript
+  let arr5 = ["c", "a", "b"];
+  const sorted = arr5.toSorted();
+  
+  console.log(arr5); // ["c", "a", "b"]
+  console.log(sorted); // ["a", "b", "c"]
+  ```
+- 숫자 정렬 (오름차순)
+  ```javascript
+  let arr5 = [5, 1, 7];
+  const sorted = arr5.toSorted();
+  
+  console.log(arr5) // [5, 1, 7]
+  console.log(sorted); // [1, 5, 7]
+  ```
 
 # 
 
