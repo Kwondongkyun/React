@@ -120,6 +120,16 @@ setTimeout(() => {
 console.log(3);
 // 결과: 1, 3, 2
 ```
+
+```jsx
+console.log("작업 1 시작");
+
+setTimeout(() => {
+  console.log("2초 후 실행되는 작업");
+}, 2000);
+
+console.log("작업 1 끝");
+```
 #### **실행 흐름:**
 1. `console.log("작업 1 시작")` 실행 → 출력: `작업 1 시작`.
 2. `setTimeout` 호출 → 타이머 작업이 **Web APIs**로 전달됨.
