@@ -15,10 +15,16 @@
 - **Pending (대기 상태)**: 작업이 아직 진행 중인 상태.
 - **Fulfilled (성공 상태)**: 작업이 성공적으로 완료된 상태.
 - **Rejected (실패 상태)**: 작업이 실패한 상태.
+<img width="450" alt="스크린샷 2025-01-05 18 39 22" src="https://github.com/user-attachments/assets/55bca01b-2b00-41c6-9bdc-bea60a858de4" />
+
 
 ### 상태 전환
 - `Pending` → `Fulfilled`: 작업이 성공적으로 완료됨(이를 **resolve**라고 표현).
 - `Pending` → `Rejected`: 작업이 실패함(이를 **reject**라고 표현).
+<p align="center">
+  <img width="320" alt="스크린샷 2025-01-05 18 38 39" src="https://github.com/user-attachments/assets/54cbfb5e-d57b-46a3-b198-9f0f9cd74c22" />
+  <img width="320" alt="스크린샷 2025-01-05 18 38 59" src="https://github.com/user-attachments/assets/6b7bf641-4b72-489a-ad51-522dd90cb921" />
+</p>
 
 <br/> 
 
