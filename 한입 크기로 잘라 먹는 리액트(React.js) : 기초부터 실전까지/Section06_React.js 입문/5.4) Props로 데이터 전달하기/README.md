@@ -82,9 +82,11 @@
    export default App;
    ```
 
-**결과:**  
- <img width="200" alt="스크린샷 2025-01-11 21 15 26" src="https://github.com/user-attachments/assets/802994e5-b032-408f-92b3-5bb321ad7cdc" />
-- Props로 전달된 값에 따라 버튼의 텍스트와 색상이 다르게 설정된다. Props를 전달하지 않으면 값이 undefined로 표시될 수 있다.
+- **결과:**  
+
+  <img width="200" alt="스크린샷 2025-01-11 21 15 26" src="https://github.com/user-attachments/assets/802994e5-b032-408f-92b3-5bb321ad7cdc" />
+   
+   - Props로 전달된 값에 따라 버튼의 텍스트와 색상이 다르게 설정된다. Props를 전달하지 않으면 값이 undefined로 표시될 수 있다.
 
 # 
 
@@ -93,10 +95,10 @@
 
   <img width="200" alt="기본값 없을 때" src="https://github.com/user-attachments/assets/d145cafc-83ac-4273-9546-da5b2c51ecba" />
 
-    
 
 ### Props 값이 전달되지 않았을 때 사용할 기본값을 설정:
-- `defaultProps`
+
+#### `defaultProps` 사용하기
 - **Button.jsx**
   ```jsx
   const Button = (props) => {
@@ -131,11 +133,67 @@
    export default App;
    ```
 
-**결과:**
+- **결과:**
 
-<img width="277" alt="스크린샷 2025-01-11 21 20 37" src="https://github.com/user-attachments/assets/769e0867-f9c7-4c1d-ae00-141b82c4e898" />
+   <img width="277" alt="스크린샷 2025-01-11 21 20 37" src="https://github.com/user-attachments/assets/769e0867-f9c7-4c1d-ae00-141b82c4e898" />
 
-- `color` Props가 전달되지 않은 버튼은 기본값으로 "black"이 설정되어 렌더링된다.
+   - `color` Props가 전달되지 않은 버튼은 기본값으로 "black"이 설정되어 렌더링된다.
+
+<br />
+
+#### 자식 컴포넌트의 Props 기본값 설정
+- **Button.jsx**
+  ```jsx
+  function Button({ text, color = "red", a = 3, children }) {
+     return (
+        <button style={{ color }}>
+           {text} - {color} - {a}
+           {children}
+        </button>
+     );
+  }
+
+  export default Button;
+  ```
+
+- **App.jsx**
+  ```jsx
+  import "./App.css";
+  import Header from "./components/Header";
+  import Main from "./components/Main";
+  import Footer from "./components/Footer";
+  import Button from "./components/Button";
+   
+  function App() {
+     const buttonProps = {
+        text: "메일",
+        color: "green",
+        a: 1,
+        b: 2,
+        c: 3,
+     };
+     return (
+        <>
+           <Button {...buttonProps} />
+           <Button text={"카페"} color="blue" a="4">
+              <Footer />
+            </Button>
+           <Button text={"블로그"}>
+              <Header />
+           </Button>
+        </>
+     );
+  }
+   
+  export default App;
+  ```
+
+- **결과:**
+
+   <img width="277" alt="스크린샷 2025-01-13 19 13 15" src="https://github.com/user-attachments/assets/e4543ea7-0033-44a0-b30a-24dfc197bb11" />
+
+   - `color` Props가 전달되지 않은 버튼은 기본값으로 "red"이 설정되어 렌더링된다.
+   - `a` Props가 전달되지 않은 버튼은 기본값으로 3이 설정되어 렌더링된다.
 
 # 
 
