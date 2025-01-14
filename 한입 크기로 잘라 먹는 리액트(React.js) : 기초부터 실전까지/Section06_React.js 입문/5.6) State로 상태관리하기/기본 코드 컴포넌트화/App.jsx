@@ -5,8 +5,8 @@ import Light from "./components/Light";
 
 function App() {
   const [count, setCount] = useState(0);
-  // const [light, setLight] = useState("OFF");
-  let light = "OFF";
+  const [light, setLight] = useState("OFF");
+  
   return (
     <>
       <Light />
