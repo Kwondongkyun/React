@@ -37,33 +37,25 @@
     });
   };
   ```
+
+  1. **함수 정의**:
+     - `onChange`는 화살표 함수로 작성되었으며, `e`라는 매개변수를 받습니다. 여기서 `e`는 React에서 제공하는 이벤트 객체입니다.
   
-1. 함수 정의:
-  - onChange는 화살표 함수로 작성되었으며, e라는 매개변수를 받습니다. 여기서 e는 React에서 제공하는 이벤트 객체입니다.
-
-2. 이벤트 객체 (`e`):
-  - e.target: 이벤트가 발생한 DOM 요소를 참조합니다. 여기서는 <input>, <textarea>, <select> 같은 입력 요소를 가리킵니다.
-  - e.target.name: 입력 요소의 name 속성에 설정된 값을 가져옵니다. 이 값은 어떤 필드가 변경되었는지 식별하는 데 사용됩니다.
-  - e.target.value: 사용자가 입력한 값을 가져옵니다.
-
-3. `setInput` 함수:
-  - setInput은 상태를 업데이트하는 함수입니다. 상태는 useState 훅에서 정의된 객체 input에 저장됩니다.
-  - setInput에 전달된 객체는 상태를 새 값으로 교체합니다.
-
-4. 상태 병합 (`...input`):
-  - 스프레드 연산자(...input)를 사용하여 기존의 input 상태 값을 그대로 복사합니다.
-  - 그런 다음, [e.target.name]: e.target.value를 사용해 변경된 필드의 값만 업데이트합니다.
-    - e.target.name은 속성 이름으로 동적으로 사용됩니다.
-    - 예를 들어, name="name"인 <input>에서 onChange가 호출되면 상태 객체의 name 키가 업데이트됩니다.
-
-
-
- - `e.target.name`: 이벤트가 발생한 요소의 `name` 속성 (예: `name`, `birth`, `country`, `bio`).
-  - 인수
-    - `...input`: 기존 상태를 복사하여 덮어씁니다(상태 불변성 유지).
-    - `[e.target.name]`: 객체의 특정 키를 동적으로 업데이트합니다.
-    - `e.target.value`: 입력 필드의 현재 값.
-      
+  2. **이벤트 객체 (`e`)**:
+     - `e.target`: 이벤트가 발생한 DOM 요소를 참조합니다. 여기서는 `<input>`, `<textarea>`, `<select>` 같은 입력 요소를 가리킵니다.
+     - `e.target.name`: 입력 요소의 `name` 속성에 설정된 값을 가져옵니다. 이 값은 어떤 필드가 변경되었는지 식별하는 데 사용됩니다.
+     - `e.target.value`: 사용자가 입력한 값을 가져옵니다.
+  
+  3. **`setInput` 함수**:
+     - `setInput`은 상태를 업데이트하는 함수입니다. 상태는 `useState` 훅에서 정의된 객체 `input`에 저장됩니다.
+     - `setInput`에 전달된 객체는 상태를 새 값으로 교체합니다.
+  
+  4. **상태 병합 (`...input`)**:
+     - 스프레드 연산자(`...input`)를 사용하여 기존의 `input` 상태 값을 그대로 복사합니다.
+     - 그런 다음, `[e.target.name]: e.target.value`를 사용해 변경된 필드의 값만 업데이트합니다.
+       - `e.target.name`은 속성 이름으로 동적으로 사용됩니다.
+       - 예를 들어, `name="name"`인 `<input>`에서 `onChange`가 호출되면 상태 객체의 `name` 키가 업데이트됩니다.
+  
 # 
 
 ### 3. **제어형 컴포넌트**
@@ -168,3 +160,9 @@ const onChange = (e) => {
    - 생년월일 선택 시 `input.birth`가 업데이트됩니다.
    - 국적 선택 시 `input.country`가 업데이트됩니다.
    - 자기소개 입력 시 `input.bio`가 업데이트됩니다.
+  
+
+
+
+---
+
