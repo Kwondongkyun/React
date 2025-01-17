@@ -1,227 +1,240 @@
-# 리액트 컴포넌트
+# JSX로 UI 표현하기
 
-리액트에서는 자바스크립트 함수가 HTML 태그를 반환하도록 설정할 수 있다. 이러한 함수를 **컴포넌트**라고 하며, 리액트의 핵심 개념 중 하나이다.
+<img width="400" alt="스크린샷 2025-01-11 19 47 10" src="https://github.com/user-attachments/assets/11530841-2d68-4c28-a32e-5ff442ffdc79" />
 
-<br />
+- 자바스크립트에서는 함수가 HTML을 return하도록 만들 수 없다.
 
-## 컴포넌트 정의와 사용
+<img width="400" alt="스크린샷 2025-01-11 19 47 26" src="https://github.com/user-attachments/assets/7ac76ec8-c205-45ed-9fb2-0a5b228cba6a" />
 
-- 컴포넌트는 보통 함수의 이름을 따서 부르며, 첫 글자는 반드시 **대문자**로 시작해야한다.
-- 함수가 반환하는 HTML 요소들이 브라우저에 렌더링된다.
+- 리액트에서는 순수한 자바스크립트 문법이 아닌 JSX라고 불리는 확장된 자바스크립트의 문법을 이용하기 때문에 가능하다.
 
-#### 예시: `App` 컴포넌트
-```jsx
-import "./App.css";
+## JSX(JavaScript Extensions)
 
-function App() {
-  return (
-    <>
-      <h1>안녕 리액트!</h1>
-    </>
-  );
-}
+- 자바스크립트의 기능을 더 확장한 문법을 말한다.(일종의 자바스크립트 확장판)
+- 자바스크립트와 HTML을 혼용하여 사용할 수 있다.
+    
+  <img width="400" alt="스크린샷 2025-01-11 19 49 43" src="https://github.com/user-attachments/assets/a21b7fc6-f48a-4a82-a0ca-fcd33f0d4b02" />
 
-export default App;
-```
-
-<br /> 
-
-### 함수 컴포넌트
-
-리액트에서 **함수 컴포넌트**는 HTML 구조를 반환하는 함수이다. 
-
-#### 선언 방식
-1. **함수 선언식**으로 정의
+    
+- 동적으로 특정 변수의 값을 HTML로 렌더링하도록 설정 가능하다.
+    
     ```jsx
-    function Header() {
-      return (
-        <header>
-          <h1>Header</h1>
-        </header>
-      );
+    function Footer() {
+    	// 컴포넌트 내부 변수를 선언
+    	const myName = "kwon";
+    	
+    	return (
+    		<footer>
+    			<h1>안녕 내 이름은 {myName}이야</h1>
+    			<h1>footer</h1>
+    		</footer>
+    	);
     }
     ```
+- `jsx` 문법내에서 자바스크립트의 값을 HTML로 렌더링하고 싶다면 중괄호 `{ }`안에 작성하면 된다.
 
-2. **화살표 함수**로 정의
+- 중괄호 `{ }` 안에 가능한 값 : 숫자나 문자열 값으로써 평가될 수 있는 식이면 무엇이든지 가능하다.
+    
     ```jsx
-    const Header = () => {
+    const Main = () => {
+      const number = 10;
       return (
-        <header>
-          <h1>Header</h1>
-        </header>
+        <main>
+          <h1>main</h1>
+          <h2>{number % 2 === 0 ? "짝수" : "홀수"}</h2>
+        </main>
       );
     };
+    
+    export default Main;
     ```
+    
+<br />
 
-### 클래스 컴포넌트
+### 예시코드
 
-이전에는 클래스 형태로 컴포넌트를 정의했으나, 함수 컴포넌트와 훅(Hooks)의 등장 이후로 잘 사용되지 않는다.  
+- `Main.jsx`
 
-# 
-
-## 컴포넌트 작성 시 주의사항
-
-1. 컴포넌트 이름은 반드시 첫 글자가 대문자로 시작해야 한다. 
-   - 소문자로 시작하면 리액트는 이를 일반 HTML 태그로 간주하기 때문
-2. 컴포넌트는 **반드시 JSX 구조를 반환**해야 한다.
-
-# 
-
-## 브라우저에 렌더링 확인
-
-`App.jsx` 파일에서 `App` 컴포넌트는 화면에 렌더링되는 루트 컴포넌트이다.
-
-### 초기 상태
-```jsx
-import "./App.css";
-
-function Header() {
-  return (
-    <header>
-      <h1>Header</h1>
-    </header>
-  );
-}
-
-function App() {
-  return (
-    <>
-      <h1>안녕 리액트!</h1>
-    </>
-  );
-}
-
-export default App;
-```
-
-#### 문제
-<img width="300" alt="스크린샷 2025-01-11 17 11 09" src="https://github.com/user-attachments/assets/0c557c01-2562-434d-80ae-6b01b6bfd16a" />
-
-- 브라우저에 `App` 컴포넌트만 렌더링되며, `Header` 컴포넌트는 화면에 나타나지 않는다.
-- 이유: `App` 컴포넌트가 `Header` 컴포넌트를 포함하지 않기 때문이다.
-
-### 수정된 `App.jsx`
-```jsx
-import "./App.css";
-
-function Header() {
-  return (
-    <header>
-      <h1>Header</h1>
-    </header>
-  );
-}
-
-function App() {
-  return (
-    <>
-      <Header />
-      <h1>안녕 리액트!</h1>
-    </>
-  );
-}
-
-export default App;
-```
-
-#### 결과
-<img width="300" alt="스크린샷 2025-01-11 17 14 28" src="https://github.com/user-attachments/assets/b4db9d37-da00-4ea2-86d7-d55e7ea40061" />
-
-- `Header` 컴포넌트가 `App` 컴포넌트의 자식으로 포함되어 화면에 렌더링된다.
+  ```jsx
+  const Main = () => {
+    const number = 10;
+    return (
+      <main>
+        <h1>main</h1>
+        <h2>{number}</h2>
+      </main>
+    );
+  };
+  
+  export default Main;
+  ```
 
 # 
 
-## 컴포넌트 계층 구조
+## JSX 문법 주의사항
 
-### 부모 컴포넌트와 자식 컴포넌트
-- **`Header`**: 다른 컴포넌트의 리턴문 내부에 포함되는 **자식 컴포넌트**이다.
-- **`App`**: 화면에 직접 렌더링되며, 다른 컴포넌트를 포함하는 **부모 컴포넌트**이다.
+### 1. 중괄호 내부에는 자바스크립트 표현식만 넣을 수 있다.
+
+- 자바스크립트 표현식
+    - 삼항 연산자, 값, 변수의 이름처럼 특정한 값으로 평가될 수 있는 식을 의미한다.
+    - 조건문, 반복문은 불가능하다.
 
 <br />
 
-### 리액트 컴포넌트 계층 구조
-리액트의 모든 컴포넌트는 계층 구조를 가진다.
+### 2. JSX에서는 숫자나 문자열 또는 배열의 값만 정상적으로 렌더링된다.
+<img width="300" alt="스크린샷 2025-01-11 20 04 19" src="https://github.com/user-attachments/assets/f0d43c78-17f6-44e4-a68b-817502df37ea" />
 
-<img width="400" alt="리액트 컴포넌트 계층구조" src="https://github.com/user-attachments/assets/0107a2f5-3241-41cf-bbf0-631db301822b" />
-
-- **`App` 컴포넌트**: 모든 컴포넌트의 루트가 되는 조상 컴포넌트이다.
-- 모든 자식 컴포넌트는 `App` 컴포넌트 안에서 관리된다.
-
-#### 계층 구조 예시
 ```jsx
-<App>
-  <Header />
-  <Main>
-    <Footer />
-  </Main>
-</App>
+const Main = () => {
+  const number = 10;
+  return (
+    <main>
+      <h1>main</h1>
+      <h2>{number % 2 === 0 ? "짝수" : "홀수"}</h2>
+      {10}
+      {number}
+      {[1, 2, 3]}
+      {true}
+      {undefined}
+      {null}
+    </main>
+  );
+};
+
+export default Main;
+
 ```
 
+- `true`, `undefined`, `null` 같은 값은 오류를 발생시키지는 않지만 화면에 렌더링 되지 않는다.
+- 객체 또한 렌더링 할 수 없다.
+    
+    ➡️ 점 표기법을 사용하여 문자열이나 숫자값을 렌더링 하도록 바꿔줘야한다. 
+    
+    ```jsx
+    const Main = () => {
+      const number = 10;
+      const obj = { a: 1 };
+      return (
+        <main>
+          <h1>main</h1>
+          <h2>{number % 2 === 0 ? "짝수" : "홀수"}</h2>
+          {10}
+          {number}
+          {[1, 2, 3]}
+          {true}
+          {undefined}
+          {null}
+          {obj}  // 오류 발생
+          {obj.a} // 점 표기법 사용
+        </main>
+      );
+    };
+    
+    export default Main;
+    ```
+<br />
+
+### 3. 모든 태그는 닫혀있어야 한다.
+
+<br />
+
+### 4. 최상위 태그는 반드시 하나여야 한다.
+
+- 최상위 태그
+    - 리턴문의 소괄호 안에서 가장 높은 위치에 있는 태그(`main`, `div` 등)
+- 적절한 최상위 태그가 없을 경우 빈 태그로 묶어주면 된다.(`<>`, `</>`)
+
 # 
 
-## 루트 컴포넌트 변경하기
+## 예시 코드
+- `Main` 컴포넌트가 조건에 따라 각각 다른 UI 랜더링 하기
 
-기본적으로 `App` 컴포넌트가 루트 컴포넌트로 설정되지만, 원하는 다른 컴포넌트로 변경할 수 있다.
-
-#### 루프 컴포넌트 변경 예시(App -> Hello)
-- `Main.jsx` (렌더링 설정 파일)
   ```jsx
-  import { createRoot } from "react-dom/client";
-  import App from "./App.jsx";
-  
-  const Hello = () => {
-    return <div>Hello</div>;
+  const Main = () => {
+    const user = {
+      name: "kwon",
+      isLogin: true,
+    };
+    if (user.isLogin) {
+      return <div>로그아웃</div>;
+    } else {
+      return <div>로그인</div>;
+    }
+    // return <>{user.isLogin ? <div>로그아웃</div> : <div>로그인</div>}</>;
   };
   
-  createRoot(document.getElementById("root")).render(<Hello />);
-  ```
-
-#### 결과
-- 이제 `Hello` 컴포넌트가 루트 컴포넌트가 되어 화면에 렌더링된다.
-
-# 
-
-## 컴포넌트 파일 분리
-
-모듈화는 프로젝트 관리의 핵심이다. 컴포넌트별로 파일을 분리해 관리하면 코드 가독성과 유지보수가 훨씬 수월해진다.
-
-### 파일 분리 과정
-
-1. **`src` 아래 `components` 폴더 생성**  
-2. **`Header.jsx` 파일 생성**
-
-  #### `Header.jsx`
-  ```jsx
-  function Header() {
-    return (
-      <header>
-        <h1>Header</h1>
-      </header>
-    );
-  }
-  
-  export default Header;
-  ```
-
-3. **`App.jsx`에서 `Header` 임포트**
-  ```jsx
-  import Header from "./component/Header";
-  
-  function App() {
-    return (
-      <>
-        <Header />
-        <h1>안녕 리액트!</h1>
-      </>
-    );
-  }
-  
-  export default App;
+  export default Main;
   ```
 
 # 
 
-> ## 정리
-> - **모든 컴포넌트는 루트 컴포넌트(`App`)의 자식으로 존재해야 렌더링된다.**
-> - 컴포넌트를 작성할 때 **첫 글자는 대문자**로 시작한다.
-> - 컴포넌트 파일을 분리해 모듈화를 구현하면 프로젝트 관리가 쉬워진다.
+## JSX 문법 상에서 HTML 요소(DOM 요소)에 스타일 적용하기
+
+### 1. DOM 요소에 직접 스타일 속성 설정하기
+
+- `return`문 안에 직접적으로 스타일링 코드 작성
+    
+    ```jsx
+    const Main = () => {
+      const user = {
+        name: "kwon",
+        isLogin: true,
+      };
+      if (user.isLogin) {
+        return (
+          <div style={{ backgroundColor: "red", borderBottom: "5px solid blue" }}>
+            로그아웃
+          </div>
+        );
+      } else {
+        return <div>로그인</div>;
+      }
+      // return <>{user.isLogin ? <div>로그아웃</div> : <div>로그인</div>}</>;
+    };
+    
+    export default Main;
+    ```
+    
+
+### 2. 별도의 CSS 파일 생성
+
+### `Main.css`
+
+```css
+.logout {
+  background-color: ivory;
+  border-bottom: 5px solid green;
+}
+```
+
+### `Main.jsx`
+
+<img width="300" alt="스크린샷 2025-01-11 20 23 36" src="https://github.com/user-attachments/assets/6f08f396-49d0-415d-859e-4f6f33b23885" />
+
+```jsx
+import "./Main.css";
+
+const Main = () => {
+  const user = {
+    name: "kwon",
+    isLogin: true,
+  };
+  if (user.isLogin) {
+    return <div className="logout">로그아웃</div>;
+  } else {
+    return <div>로그인</div>;
+  }
+  // return <>{user.isLogin ? <div>로그아웃</div> : <div>로그인</div>}</>;
+};
+
+export default Main;
+```
+
+
+**`import "./Main.css";`** 
+
+- 컴포넌트에서 CSS 파일을 불러올 때는 import 뒤에 파일의 경로만 입력하면 된다.
+
+**`className`** 
+
+- `JSX`에서는 자바스크립트와 `HTML`을 함께 사용하고 있기 때문에 자바스크립트의 예약어인 `class` 사용 불가하다.
