@@ -1,157 +1,487 @@
-## `useRef` 주요 특징 요약
+# useRef
 
-1. **리렌더링 비발생**: 값이 변경되어도 컴포넌트를 리렌더링하지 않습니다.
-2. **DOM 접근**: 특정 DOM 요소에 직접 접근하거나 조작할 수 있습니다.
-3. **Mutable 변수**: 컴포넌트의 상태와는 별개로 지속적으로 값을 유지할 수 있는 저장소 역할을 합니다.
+- `useReference`의 줄임말로 컴포넌트 내부에 새로운 레퍼런스 객체를 생성해주는 기능이다.
+- 코드예시:
+    
+    ```jsx
+    const refObject = useRef()
+    ```
+    
+- 생성한 레퍼런스 객체는 컴포넌트 내부의 변수로써 일반적인 값들을 저장할 수 있다.
+    
+    → `useRef`는 `useState`와 비슷해보인다.
+  
+# 
+
+## `useRef` vs. `useState`
+
+### `useRef`
+: Reference 객체 생성
+
+#### 공통점
+- 컴포넌트 내부의 변수로 활용 가능
+
+#### 차이점
+- 어떤 경우에도 리렌더링을 유발하지 않음
+
+<br />
+
+### `useState`
+: State를 생성
+
+### 공통점
+- 컴포넌트 내부의 변수로 활용 가능
+
+### 차이점
+- 값이 변경되면 컴포넌트 리렌더링
 
 # 
 
-### 주요 활용 사례
+### `useRef` 이용 예시
 
-#### 1. 값 저장 (Mutable 값)
-- 컴포넌트 내부에서 렌더링에 영향을 미치지 않아야 하는 값을 저장할 때 사용됩니다.
-
+- 컴포넌트가 렌더링하는 특정 DOM 요소에 접근할 수 있다. 그럼으로써 해당 요소를 조작하는 것도 가능하다.
   ```jsx
-  import { useRef } from "react";
-  
-  function Counter() {
-    const count = useRef(0);
-  
-    const increment = () => {
-      count.current++;
-      console.log(`Count: ${count.current}`);
-    };
-  
-    return (
-      <div>
-        <button onClick={increment}>Increment</button>
-      </div>
-    );
-  }
+  const refObject = useRef()
+    
+  <div>
+    <textarea
+      ref={refObject}
+      name="bio"
+      value={input.bio}
+      onChange={onChange}
+    />
+  </div>
   ```
-  ➡️ `count.current`는 상태처럼 값을 유지하지만, 값이 바뀌어도 리렌더링이 발생하지 않습니다.
+  <img width="450" alt="스크린샷 2025-01-16 23 46 23" src="https://github.com/user-attachments/assets/ab7d97cf-bd91-4246-a8c7-8a472f6f4669" />
+
+
+
+# 
+
+## `useRef` 이용하여 새로운 레퍼런스 객체 생성하기
+
+### `useRef` 내장함수 불러오기
+
+```jsx
+import { useRef } from "react";
+```
 
 <br />
 
-#### 2. DOM 요소 접근
-- `useRef`를 사용하여 특정 DOM 요소를 참조하고 조작할 수 있습니다.
+### 새로운 레퍼런스 객체 생성하기
 
-  ```jsx
-  import { useRef } from "react";
-  
-  function FocusInput() {
-    const inputRef = useRef();
-  
-    const focusInput = () => {
-      inputRef.current.focus(); // DOM 요소에 직접 접근하여 포커스
-    };
-  
-    return (
-      <div>
-        <input ref={inputRef} type="text" placeholder="Enter your name" />
-        <button onClick={focusInput}>Focus Input</button>
-      </div>
-    );
-  }
-  ```
-  ➡️ `ref={inputRef}`로 DOM 요소를 연결하고, `inputRef.current`를 통해 접근합니다.
+```
+const refObj = useRef();
+console.log(refObj);
+```
+➡️ `current`라는 프로퍼티를 갖는 객체 하나가 출력된다.(이 객체가 레퍼런스 객체이다.)
+
+  <img width="400" alt="스크린샷 2025-01-16 23 49 47" src="https://github.com/user-attachments/assets/78924283-e0dd-4b0e-8b14-7201c5ee7c3a" />
+
+> 레퍼런스 객체란
+> - `current`라는 프로퍼티에 현재 보관할 값을 담아두기만 하는 단순한 자바스크립트 객체이다.
 
 <br />
 
-#### 3. 렌더링 발생 횟수 카운트
-- `useRef`는 컴포넌트가 얼마나 자주 렌더링되는지 추적할 때 유용합니다.
+### `useRef`로 새로운 레퍼런스 객체를 생성할 때 인수로 초기값 전달하기
 
-  ```jsx
-  import { useRef, useEffect, useState } from "react";
-  
-  function RenderCounter() {
-    const renderCount = useRef(0);
-    const [count, setCount] = useState(0);
-  
-    useEffect(() => {
-      renderCount.current++;
+```jsx
+const refObj = useRef(0);
+console.log(refObj);
+```
+<img width="400" alt="스크린샷 2025-01-16 23 52 44" src="https://github.com/user-attachments/assets/cdc4d4af-dd67-441f-b141-431bccafd29d" />
+
+➡️ `current` 프로퍼티에 0이라는 초기값을 저장하고 있는 레퍼런스 객체가 출력된다.
+
+<br />
+
+### 레퍼런스 객체의 값 사용하기
+
+- 점 표기법 사용
+    
+    ```jsx
+    const refObj = useRef(0);
+    console.log(refObj.current);
+    ```
+    <img width="400" alt="스크린샷 2025-01-16 23 54 14" src="https://github.com/user-attachments/assets/ccf4f9a7-d5d6-4e0e-94d3-f28dab2a82ae" />
+
+# 
+
+## useRef는 값이 바뀌어도 리렌더링 되지 않는다.
+
+```jsx
+...
+	
+// 새로운 레퍼런스 오브젝트 생성
+  const refObj = useRef(0);
+  console.log("레지스터 렌더링");
+
+  const onChange = (e) => {
+    console.log(e, e.target, e.target.value);
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
     });
-  
-    return (
-      <div>
-        <p>Render count: {renderCount.current}</p>
-        <button onClick={() => setCount(count + 1)}>Increase Count</button>
-      </div>
-    );
-  }
-  ```
+	};
 
-  ➡️ `renderCount.current`는 리렌더링마다 값이 증가하지만, 리렌더링을 트리거하지 않습니다.
+  return (
+    <div>
+      <button
+        onClick={() => {
+          refObj.current++;
+          console.log(refObj.current);
+        }}
+      >
+        ref + 1
+      </button>
+      
+      ...
+```
+<img width="300" alt="스크린샷 2025-01-16 23 58 49" src="https://github.com/user-attachments/assets/dc80f954-6678-45f1-9d0c-accee113f2f4" />
 
-<br />
+- 이벤트 핸들러만 계속 실행이 될 뿐 컴포넌트를 리렌더링 하진 않는다.
 
-#### 4. Form Validation과 DOM 조작
-- 입력 검증 후 특정 입력 필드로 포커스를 이동시키는 예제입니다.
+  ➡️ 레퍼런스 객체는 컴포넌트 내부에서 렌더링에 영향을 미치지 않아야 되는 변수를 생성할 때 활용한다.
+
+# 
+
+## 레퍼런스 객체의 활용 사례 1
+
+- 레퍼런스 객체를 이용해서 레지스터 컴포넌트가 렌더링하고 있는 4개의 폼에 사용자가 얼마나 많은 횟수을 변경을 일으켰는지 수정 횟수 카운트 하기
 
   ```jsx
   import { useState, useRef } from "react";
   
-  function Form() {
-    const [form, setForm] = useState({ name: "", email: "" });
-    const nameInputRef = useRef();
-    const emailInputRef = useRef();
+  const Register = () => {
+    const [input, setInput] = useState({
+      name: "",
+      birth: "",
+      country: "",
+      bio: "",
+    });
   
-    const handleSubmit = () => {
-      if (form.name === "") {
-        alert("Name is required");
-        nameInputRef.current.focus(); // 이름 필드로 포커스 이동
-        return;
-      }
+    // 새로운 레퍼런스 오브젝트 생성
+    const countRef = useRef(0);
   
-      if (form.email === "") {
-        alert("Email is required");
-        emailInputRef.current.focus(); // 이메일 필드로 포커스 이동
-        return;
-      }
-  
-      alert("Form submitted successfully");
+    const onChange = (e) => {
+      countRef.current++;
+      console.log(countRef.current);
+      setInput({
+        ...input,
+        [e.target.name]: e.target.value,
+      });
     };
   
     return (
       <div>
-        <input
-          ref={nameInputRef}
-          type="text"
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-        />
-        <input
-          ref={emailInputRef}
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <button onClick={handleSubmit}>Submit</button>
+        <div>
+          <input
+            name="name"
+            value={input.name}
+            onChange={onChange}
+            placeholder="이름"
+          />
+        </div>
+        <div>
+          <input
+            name="birth"
+            value={input.birth}
+            type="date"
+            onChange={onChange}
+          />
+        </div>
+        <div>
+          <select name="country" value={input.country} onChange={onChange}>
+            <option value=""></option>
+            <option value="kr">한국</option>
+            <option value="us">미국</option>
+            <option value="uk">영국</option>
+          </select>
+        </div>
+        <div>
+          <textarea name="bio" value={input.bio} onChange={onChange} />
+        </div>
       </div>
     );
-  }
+  };
+  export default Register;
   ```
+  
+  <img width="300" alt="스크린샷 2025-01-17 00 05 28" src="https://github.com/user-attachments/assets/0e30e942-4e21-460e-a9d7-c55686b97aa6" />
 
-  ➡️ 필드 값 검증 후 해당 필드로 포커스를 이동시켜 사용자 경험을 개선합니다.
+#
+
+## 레퍼런스 객체의 활용 사례 2
+
+- 레지스터 컴포넌트가 렌더링 하고있는 DOM 요소들을 직접 조작해보기
+- 회원가입을 제출하는 기능
+
+1. 제출 버튼 생성
+    
+    ```jsx
+    <button onClick={onSubmit}>제출</button>
+    ```
+    
+2. `onSubmit` 함수 생성
+    
+    ```jsx
+    const onSubmit = () => {
+        if (input.name === "") {
+          // 이름을 입력하는 DOM 요소에 포커스
+        }
+    };
+    ```
+    
+    - 사용자가 이름을 입력받는 이름을 정확히 입력했는지 확인하기
+    - 특정 DOM요소에 포커스를 주려면 `return`문 안의 이름을 입력하는 DOM 요소인 input 태그에 접근할 수 있어야 한다.
+        
+        ```jsx
+        return (
+            <div>
+              <div>
+                <input
+                  name="name"
+                  value={input.name}
+                  onChange={onChange}
+                  placeholder="이름"
+                />
+              </div>
+              
+              ...
+        ```
+        
+    
+      ➡️ 레퍼런스 객체를 이용하여 접근할 수 있다.
+    
+    1. 새로운 레퍼런스 객체인 `inputRef` 생성
+        
+        ```jsx
+        const inputRef = useRef();
+        ```
+        
+    2. `input` 태그에 `ref` 속성으로 넣어준다.
+        
+        ```jsx
+        return (
+            <div>
+              <div>
+                <input
+                  ref={inputRef} // ref 속성 추가
+                  name="name"
+                  value={input.name}
+                  onChange={onChange}
+                  placeholder="이름"
+                />
+              </div>
+        ```
+        
+        → `input`태그가 렌더링하는 DOM 요소가 `inputRef`라는 레퍼런스 객체에 저장이 되게된다.
+        
+    3. `onSubmit` 함수안에서 제출버튼 클릭 시 `inputRef`의 `current`값 출력하기
+        
+        ```jsx
+        const onSubmit = () => {
+        	if (input.name === "") {
+        		 // 이름을 입력하는 DOM 요소에 포커스
+             console.log(inputRef.current);
+        	}
+        };
+        ```
+        
+    4. 제출 버튼 클릭 시 input태그 DOM 요소가 출력된다.
+       
+       <img width="400" alt="스크린샷 2025-01-17 00 17 03" src="https://github.com/user-attachments/assets/678d63dc-5e96-4fda-bc79-7fd261f138de" />
+
 
 # 
 
-### `useRef`와 `useState` 비교
+## ⭐️추가 내용⭐️
 
-| Feature                     | `useRef`                          | `useState`                  |
-|-----------------------------|------------------------------------|-----------------------------|
-| 렌더링 발생 여부            | 값 변경 시 렌더링 발생하지 않음     | 값 변경 시 렌더링 발생       |
-| 주 용도                     | 값 저장, DOM 조작                  | 상태 관리                   |
-| 값 초기화 방법               | `useRef(initialValue)`            | `useState(initialValue)`    |
-| 값 접근 방법                | `ref.current`                     | 상태 값 변수 (`state`)      |
+### `useRef`대신 자바스크립트 `let` 사용하면 되지 않을까?
+
+- **자바스크립트 `let` 사용 코드**
+    
+    ```jsx
+    import { useState, useRef } from "react";
+    
+    const Register = () => {
+      const [input, setInput] = useState({
+        name: "",
+        birth: "",
+        country: "",
+        bio: "",
+      });
+    
+      // 새로운 레퍼런스 오브젝트 생성
+      const countRef = useRef(0);
+      const inputRef = useRef();
+    
+      let count = 0; // 자바스크립트 let 사용
+    
+      const onChange = (e) => {
+        count++; // 자바스크립트 let 사용
+        console.log(count); // 자바스크립트 let 사용
+        setInput({
+          ...input,
+          [e.target.name]: e.target.value,
+        });
+      };
+    
+      const onSubmit = () => {
+        if (input.name === "") {
+          // 이름을 입력하는 DOM 요소에 포커스
+          inputRef.current.focus();
+        }
+      };
+    
+      return (
+        <div>
+          <div>
+            <input
+              ref={inputRef}
+              name="name"
+              value={input.name}
+              onChange={onChange}
+              placeholder="이름"
+            />
+          </div>
+          <div>
+            <input
+              name="birth"
+              value={input.birth}
+              type="date"
+              onChange={onChange}
+            />
+          </div>
+          <div>
+            <select name="country" value={input.country} onChange={onChange}>
+              <option value=""></option>
+              <option value="kr">한국</option>
+              <option value="us">미국</option>
+              <option value="uk">영국</option>
+            </select>
+          </div>
+          <div>
+            <textarea name="bio" value={input.bio} onChange={onChange} />
+          </div>
+          <button onClick={onSubmit}>제출</button>
+        </div>
+      );
+    };
+    export default Register;
+    ```
+    
+- **결과**
+
+  <img width="400" alt="스크린샷 2025-01-17 00 23 20" src="https://github.com/user-attachments/assets/1313807a-3e24-44b6-96a5-08f45d50b874" />
+    
+  ➡️ 값이 1로 고정이 된다.
+    
+- **이유**
+    1. `input`에 값을 입력하게 되면 코드상에 `onChange` 이벤트 핸들러가 실행이 되면서 `state`의 값을 변경한다.
+        
+        ```jsx
+        const onChange = (e) => {
+        	count++; // 자바스크립트 let 사용
+        	console.log(count); // 자바스크립트 let 사용
+        	setInput({
+        	  ...input,
+            [e.target.name]: e.target.value,
+        	});
+        };
+        ```
+        
+    2. `Register` 컴포넌트가 리렌더링 된다.
+        
+        → 컴포넌트 역할을 하는 `Register`함수가 다시 호출되므로 함수 안에있는 코드도 모두 다시 실행된다.
+        
+        → count 변수를 초기화 하고있는 코드(`let count = 0;`)도 다시 실행되어 `count`의 값이 리렌더링 될 때마다 0으로 계속 리셋된다.
+        
+        → 결국 출력되는 값은 1로 고정이 된다.
+        
+
+- `useRef`나 `useState`를 이용해서 만든 리액트의 특수한 변수들은 컴포넌트가 리렌더링 된다고 해도 다시 리셋되지 않는다.
 
 # 
 
-### 사용 시 주의점
+### 변수의 선언을 컴포넌트 외부에 하면 되지 않을까?
 
-1. `useRef`는 값이 바뀌어도 리렌더링을 유발하지 않으므로, 화면에 즉시 반영되어야 하는 값에는 적합하지 않습니다.
-2. DOM 조작을 과도하게 사용하면 React의 선언적 접근 방식을 해칠 수 있습니다. 가능한 한 상태 기반 관리로 해결하는 것이 좋습니다.
+```jsx
+import { useState, useRef } from "react";
 
-`useRef`는 단순 값 저장, 렌더링 최적화, 또는 DOM 접근과 같이 컴포넌트의 부수적인 동작에 적합합니다.
+let count = 0; // 자바스크립트 let 사용
+
+const Register = () => {
+  const [input, setInput] = useState({
+    name: "",
+    birth: "",
+    country: "",
+    bio: "",
+  });
+
+  // 새로운 레퍼런스 오브젝트 생성
+  const countRef = useRef(0);
+  const inputRef = useRef();
+
+  const onChange = (e) => {
+    count++; // 자바스크립트 let 사용
+    console.log(count); // 자바스크립트 let 사용
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmit = () => {
+    if (input.name === "") {
+      // 이름을 입력하는 DOM 요소에 포커스
+      inputRef.current.focus();
+    }
+  };
+
+  return (
+    <div>
+      <div>
+        <input
+          ref={inputRef}
+          name="name"
+          value={input.name}
+          onChange={onChange}
+          placeholder="이름"
+        />
+      </div>
+      <div>
+        <input
+          name="birth"
+          value={input.birth}
+          type="date"
+          onChange={onChange}
+        />
+      </div>
+      <div>
+        <select name="country" value={input.country} onChange={onChange}>
+          <option value=""></option>
+          <option value="kr">한국</option>
+          <option value="us">미국</option>
+          <option value="uk">영국</option>
+        </select>
+      </div>
+      <div>
+        <textarea name="bio" value={input.bio} onChange={onChange} />
+      </div>
+      <button onClick={onSubmit}>제출</button>
+    </div>
+  );
+};
+export default Register;
+```
+
+- 수정횟수가 잘 카운팅 되긴한다.
+- 하지만 `Register` 컴포넌트를 한 번만 렌더링하는 상황에서는 문제가 발생하지 않지만 `Register` 컴포넌트를 두 번 렌더링하게 되면 문제가 발생한다.
+    
+    ➡️ `Register` 컴포넌트가 하나의 변수를 공유한다.
+    
+    - 이유
+        - `Register` 컴포넌트를 두 번 렌더링한 건 `Register` 함수를 그냥 두 번 호출한 것이다.
+            
+            ➡️ `Register` 함수와 count라는 변수는 두 번 선언된 것이 아니라 한 번만 선언된 것이다.
