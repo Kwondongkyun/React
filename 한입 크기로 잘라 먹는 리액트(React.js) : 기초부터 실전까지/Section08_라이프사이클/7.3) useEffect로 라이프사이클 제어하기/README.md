@@ -133,7 +133,7 @@ useEffect(() => {
 # 
 
 ## 예제: 모든 라이프사이클 단계 활용
-링크 : 
+<a href="https://github.com/Kwondongkyun/React/tree/main/%ED%95%9C%EC%9E%85%20%ED%81%AC%EA%B8%B0%EB%A1%9C%20%EC%9E%98%EB%9D%BC%20%EB%A8%B9%EB%8A%94%20%EB%A6%AC%EC%95%A1%ED%8A%B8(React.js)%20%3A%20%EA%B8%B0%EC%B4%88%EB%B6%80%ED%84%B0%20%EC%8B%A4%EC%A0%84%EA%B9%8C%EC%A7%80/Section08_%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4/7.3)%20useEffect%EB%A1%9C%20%EB%9D%BC%EC%9D%B4%ED%94%84%EC%82%AC%EC%9D%B4%ED%81%B4%20%EC%A0%9C%EC%96%B4%ED%95%98%EA%B8%B0">코드 링크</a>
 
 # 
 
