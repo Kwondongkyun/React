@@ -3,12 +3,12 @@
   - 값으로써 함수를 생성하는 방식
   - 호이스팅 불가능하다.
   
-  ```javascript
-  const square = function (number) {
-    return number * number;
-  };
-  const x = square(4); // `x` 의 값은 16
-  ```
+    ```javascript
+    const square = function (number) {
+      return number * number;
+    };
+    const x = square(4); // `x` 의 값은 16
+    ```
 
 - <b>화살표 함수(=>)</b> : 함수를 이전보다 더 빠르고 간결하게 생성해 줄 수 있도록 도와줌
 
