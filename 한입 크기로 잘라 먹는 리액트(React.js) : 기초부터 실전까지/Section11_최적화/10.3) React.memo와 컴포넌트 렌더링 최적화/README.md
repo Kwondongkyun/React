@@ -31,11 +31,14 @@ return (
 ```
 <img width="320" alt="Header 컴포넌트의 불필요한 리렌더링 이미지" src="https://github.com/user-attachments/assets/39d1f2b5-1972-47f2-a18d-a88f7fbcf7a2" />
 
+<br />
 
 ### 문제점
 
 - `Header` 컴포넌트는 `props`를 받지 않지만, 부모인 `App`이 리렌더링될 때 **불필요하게 같이 리렌더링**됩니다.
 - `Header`는 단순히 날짜를 렌더링하기 때문에, **todo 데이터가 변경되더라도 다시 렌더링될 필요가 없습니다.**
+
+<br />
 
 ### ✅ 해결 방법: `React.memo` 적용
 
@@ -88,6 +91,7 @@ export default React.memo(TodoItem);
 > - 객체간의 비교는 기본적으로 주소값을 기반으로 수행된다.
 > - 새롭게 생성된 함수들은 주소값이 매번 바뀌기 때문에 사실상 매번 다른값으로 생성되는 것으로 판단된다.
 
+<br />
 
 ### ✅ 해결 방법 1: `useCallback` 사용
 
@@ -97,6 +101,8 @@ export default React.memo(TodoItem);
   const onUpdate = useCallback((id) => { /* 업데이트 로직 */ }, []);
   const onDelete = useCallback((id) => { /* 삭제 로직 */ }, []);
   ```
+
+<br />
 
 ### ✅ 해결 방법 2: `React.memo` 커스터마이징
 
