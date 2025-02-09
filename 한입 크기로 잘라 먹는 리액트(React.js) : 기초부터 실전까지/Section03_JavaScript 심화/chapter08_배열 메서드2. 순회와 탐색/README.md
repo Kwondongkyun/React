@@ -8,13 +8,19 @@
   - 콜백 함수의 인수로 요소 값, 인덱스, 배열 자체를 받을 수 있음
   - 값을 반환하지 않으며, 주로 부수 효과(side effect)를 위해 사용
 
+- **콜백 함수 매개변수**:
+  - `CurrentValue` : 처리할 현재 요소
+  - `index` : 실제 배열 요소의 순서
+  - `array` : 배열 요소의 수만큼 동일한 배열 출력
+
 - **코드 예제**:
   ```javascript
   let arr1 = [1, 2, 3];
   
   // 각 요소를 순회하며 인덱스와 두 배 값을 출력
-  arr1.forEach((item, idx) => {
+  arr1.forEach((item, idx, array) => {
     console.log(`인덱스: ${idx}, 값의 두 배: ${item * 2}`);
+    console.log(array);
   });
   
   // 배열 요소의 두 배 값을 새로운 배열에 추가
